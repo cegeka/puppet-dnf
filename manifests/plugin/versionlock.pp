@@ -26,8 +26,7 @@ class dnf::plugin::versionlock (
   concat { $path:
     mode   => '0644',
     owner  => 'root',
-    group  => 'root',
-    notify => $_clean_notify,
+    group  => 'root'
   }
 
   concat::fragment { 'dnf_versionlock_header':
