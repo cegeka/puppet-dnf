@@ -23,7 +23,7 @@ class dnf::plugin::versionlock (
     ensure  => $ensure,
   }
 
-  concat { "dnf-plugin-versionlock-$path":
+  concat { $path:
     mode   => '0644',
     owner  => 'root',
     group  => 'root'
