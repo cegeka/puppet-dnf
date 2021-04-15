@@ -1,10 +1,11 @@
 # Define: dnf module
 #
 define dnf::module (
-  $ensure,
-  $state=enabled,
-  $stream=undef,
-  $profiles='*'
+  String $ensure,
+  String $state='enabled',
+  String $dnf_name=$title,
+  Variant[Integer,Float,String] $stream=undef,
+  String $profiles='*'
 ) {
 
   file { "/etc/dnf/modules.d/${title}.module":
@@ -17,10 +18,10 @@ define dnf::module (
       incl    => "/etc/dnf/modules.d/${title}.module",
       context => "/files/etc/dnf/modules.d/${title}.module",
       changes => [
-        "set ${name}/name '${name}'",
-        "set ${name}/state '${state}'",
-        "set ${name}/stream '${stream}'",
-        "set ${name}/profiles '${profiles}'",
+        "set ${dnf_name}/name '${dnf_name}'",
+        "set ${dnf_name}/state '${state}'",
+        "set ${dnf_name}/stream '${stream}'",
+        "set ${dnf_name}/profiles '${profiles}'",
       ],
       require => File["/etc/dnf/modules.d/${title}.module"]
     }
